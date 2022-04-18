@@ -1,4 +1,4 @@
-// var titleEl = document.createElement("h1");
+var titleEl = document.createElement("h1");
 var spanEl = document.querySelector(".timeLeft");
 var quizbodyEl = document.querySelector(".quizbody");
 // document.body.style.background = "black";
@@ -8,18 +8,29 @@ var timeLeft = 60;
 var currentQuestionIndex = 0;
 var quizQuestions = [
   {
-    question: "What is HTML?",
+    question: "Who is Bruce Wayne?",
     answers: [
-      "I don't know",
-      "How to meet ladies",
-      "hypertext markup language",
+      "Batman",
+      "Superman",
+      "Flash",
+      "Green Lantern",
     ],
-    correct: "hypertext markup language",
+    correct: "Batman",
   },
   {
-    question: "Which one of these is a programming language?",
-    answers: ["HTML", "Javascript", "Wordpress", "Figma"],
-    correct: "Javascript",
+    question: "Who is Hal Jordan?",
+    answers: ["Batman", "Green Lantern", "Flash", "Aquaman"],
+    correct: "Green Lantern",
+  },
+  {
+    question: "Who is Barry Batson?",
+    answers: ["Sinestro", "Flash", "Shazam", "Nightwing"],
+    correct: "Green Lantern",
+  },
+  {
+    question: "Who is Oliver Queen?",
+    answers: ["Nightwing", "Green Lantern", "Flash", "Green Arrow"],
+    correct: "Green Lantern",
   },
 ];
 

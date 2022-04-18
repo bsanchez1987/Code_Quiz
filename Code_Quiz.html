@@ -10,10 +10,22 @@
     <title>Superhero Secret Identies Quiz</title>
 </head>
 <body>
-    <div>Time Left - <span class="timeLeft">60</span></div>
-    <h1>Coding Quiz</h1>
-    <div class="quizbody">
-    </div>
+    <div id="quizContainer">
+        <header class="quizIntro">
+            <div class="hometimer container-fluid" style="color:white; background-color: black; max-width: 100%;">
+
+                <!-- View/link to highscores -->
+
+               <a href="index.html" style="text-decoration: none; "> <button style="background-color: grey; color: white; height: 40px; width: 100px;">Home</button></a>
+
+                <!-- Timer container -->
+
+                <div id="quizContainer">
+                    <div id="currentTime" class="timer" style="color: white;" class="d-flex justify-content-end time">
+                    </div>
+                </div>
+            </div>
+        </header>
 </body>
 <script src="Code_QuizJS.js"></script>
 </html>

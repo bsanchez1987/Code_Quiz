@@ -1,10 +1,10 @@
 var titleEl = document.createElement("h1");
 var spanEl = document.querySelector(".timeLeft");
+var timer = document.querySelector("#startTimer");
 var quizbodyEl = document.querySelector(".quizbody");
-// document.body.style.background = "black";
-// titleEl.textContent = "Coding Quiz"
-// document.body.append(titleEl);
 var timeLeft = 60;
+var holdInterval = 0;
+var penalty = 10;
 var currentQuestionIndex = 0;
 var quizQuestions = [
   {
@@ -25,15 +25,44 @@ var quizQuestions = [
   {
     question: "Who is Barry Batson?",
     answers: ["Sinestro", "Flash", "Shazam", "Nightwing"],
-    correct: "Green Lantern",
+    correct: "Shazam",
   },
   {
     question: "Who is Oliver Queen?",
     answers: ["Nightwing", "Green Lantern", "Flash", "Green Arrow"],
-    correct: "Green Lantern",
+    correct: "Green Arrow",
+  },
+
+  {
+    question: "Who is John Jones?",
+    answers: ["Nightwing", "Green Lantern", "Martian Manhunter", "Green Arrow"],
+    correct: "Martian Manhunter",
   },
 ];
 
+console.log(quizQuestions);
+
+var ulEl = document.createElement("ul");
+console.log(ulEl);
+console.log(timer);
+if (timer !== null) {
+    timer.addEventListener("click", function () {
+        if (holdInterval === 0) {
+            holdInterval = setInterval(function () {
+                secondsLeft--;
+                spanEl.textContent = secondsLeft + " seconds";
+
+                if (secondsLeft <= 0) {
+                    clearInterval(holdInterval);
+                    quizComplete();
+                    spanEl.textContent = "OOOPS! OUT OF TIME!";
+                }
+            }, 1000);
+        }
+        render(currentQuestionIndex);
+    });
+}
+console.log(currentQuestionIndex);
 //create a count function
 function count() {
   timeLeft--;
@@ -62,11 +91,13 @@ function showQuestion() {
     button.addEventListener("click", function (event) {
       var selectedAnswer = event.target.textContent;
       alert("YOU CLICKED ON  " + selectedAnswer);
-      if (selectedAnswer === q.correct) {
-        //handle correct logic here
-        correct();
-      } else {
-        //handle incorrect logic here
+      if (selectedAnswer === q.correct)  {
+        score++;
+        answerDiv.textContent = "Correct! " + quizQuestions[currentQuestionIndex].correct;
+    }
+       else {
+        secondsLeft = secondsLeft - penalty;
+            answerDiv.textContent = "Wrong! " + quizQuestions[currentQuestionIndex].answers;
         incorrect();
       }
 

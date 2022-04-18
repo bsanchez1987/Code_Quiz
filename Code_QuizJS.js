@@ -1,11 +1,15 @@
-var titleEl = document.createElement("h1");
+var score = 0;
+var currentQuestionIndex = 0;
 var spanEl = document.querySelector(".timeLeft");
 var timer = document.querySelector("#startTimer");
 var quizbodyEl = document.querySelector(".quizbody");
+var quizContainer = document.querySelector("#quizContainer");
+var allScores = JSON.parse(localStorage.getItem("allScores")) || [];
+var titleEl = document.createElement("h1");
 var timeLeft = 60;
 var holdInterval = 0;
 var penalty = 10;
-var currentQuestionIndex = 0;
+
 var quizQuestions = [
   {
     question: "Who is Bruce Wayne?",
@@ -64,25 +68,30 @@ if (timer !== null) {
 }
 console.log(currentQuestionIndex);
 
-function render(currentquestionIndex) {
+function render(currentQuestionIndex) {
   questionsSection.innerHTML = "";
   ulEl.innerHTML = "";
 
   for (var i = 0; i < questions.length; i++) {
     // Appends question title only
-    var userQuestion = quizQuestions[currentquestionIndex].question;
-    var userChoices = quizQuestions[currentquestionIndex].answers;
+    var userQuestion = quizQuestions[currentQuestionIndex].question;
+    var userChoices = quizQuestions[currentQuestionIndex].answers;
     quizQuestionsSection.textContent = userQuestion;
 }
 
-
-
-function correct() {
-  alert("YOU GOT IT!");
+  userChoices.forEach(function (newItem) {
+        var listItem = document.createElement("li");
+        listItem.textContent = newItem;
+        quizQuestionsSection.appendChild(ulEl);
+        ulEl.appendChild(listItem);
+        listItem.addEventListener("click", (compare));
+    })
 }
 
-function incorrect() {
-  alert("WRONG!");
-}
+function compare(event) {
+  var element = event.target;
 
-showQuestion();
+  if (element.matches("li")) {
+
+      var answerDiv = document.createElement("div");
+      answerDiv.setAttribute("id", "answerDiv");

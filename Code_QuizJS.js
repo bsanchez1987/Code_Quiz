@@ -63,52 +63,19 @@ if (timer !== null) {
     });
 }
 console.log(currentQuestionIndex);
-//create a count function
-function count() {
-  timeLeft--;
-  spanEl.textContent = timeLeft;
-  //build additional logic here to handle if time runs out
+
+function render(currentquestionIndex) {
+  questionsSection.innerHTML = "";
+  ulEl.innerHTML = "";
+
+  for (var i = 0; i < questions.length; i++) {
+    // Appends question title only
+    var userQuestion = quizQuestions[currentquestionIndex].question;
+    var userChoices = quizQuestions[currentquestionIndex].answers;
+    quizQuestionsSection.textContent = userQuestion;
 }
 
-//create the timer function
 
-var timer = setInterval(count, 1000);
-
-//function to put the current question and choices on the page
-function showQuestion() {
-  quizbodyEl.innerHTML = "";
-  var q = quizQuestions[currentQuestionIndex];
-  var qTitleEl = document.createElement("h1");
-  qTitleEl.textContent = q.question; //q.question
-  quizbodyEl.append(qTitleEl);
-
-  //loop through the answers array and put them on the page
-  var answers = q.answers;
-  for (var i = 0; i < answers.length; i++) {
-    var answer = answers[i];
-    var button = document.createElement("button");
-    button.textContent = answer;
-    button.addEventListener("click", function (event) {
-      var selectedAnswer = event.target.textContent;
-      alert("YOU CLICKED ON  " + selectedAnswer);
-      if (selectedAnswer === q.correct)  {
-        score++;
-        answerDiv.textContent = "Correct! " + quizQuestions[currentQuestionIndex].correct;
-    }
-       else {
-        secondsLeft = secondsLeft - penalty;
-            answerDiv.textContent = "Wrong! " + quizQuestions[currentQuestionIndex].answers;
-        incorrect();
-      }
-
-      //go to next q here
-      currentQuestionIndex++;
-      showQuestion();
-    });
-    quizbodyEl.append(button);
-    //after a button is created, add a event listener to it to handle clicking
-  }
-}
 
 function correct() {
   alert("YOU GOT IT!");

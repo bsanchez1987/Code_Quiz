@@ -73,7 +73,6 @@ function render(currentQuestionIndex) {
   ulEl.innerHTML = "";
 
   for (var i = 0; i < questions.length; i++) {
-    // Appends question title only
     var userQuestion = quizQuestions[currentQuestionIndex].question;
     var userChoices = quizQuestions[currentQuestionIndex].answers;
     quizQuestionsSection.textContent = userQuestion;
@@ -101,8 +100,6 @@ function compare(event) {
         answerDiv.textContent = "Correct! The answer is:  " + quizQuestions[currentQuestionIndex].correct;
     }
     else {
-
-        // Will deduct 10 seconds off secondsLeft for wrong answers
 
         timeLeft = timeLeft - penalty;
         answerDiv.textContent = "Wrong! The correct answer is:  " + quizQuestions[currentQuestionIndex].answers;
@@ -133,13 +130,11 @@ else {
 questionsSection.appendChild(answerDiv);
 
 }
-// Quiz complete clear questionsSection
 
 function quizComplete() {
 questionsSection.innerHTML = "";
 currentTime.innerHTML = "";
 
-// Create h1, p elements
 
 var h1El = document.createElement("h1");
 h1El.setAttribute("id", "h1El");
@@ -152,7 +147,6 @@ pEl.setAttribute("id", "pEl");
 
 questionsSection.appendChild(pEl);
 
-// Calculates time remaining and creates score
 
 if (timeLeft >= 0) {
     var timeRemaining = timeLeft;
@@ -163,7 +157,6 @@ if (timeLeft >= 0) {
     questionsSection.appendChild(pEl2);
 }
 
-// User prompted to enter intials
 
 var enterInitials = document.createElement("initials");
 enterInitials.setAttribute("id", "enterInitials");
@@ -171,7 +164,6 @@ enterInitials.textContent = "Enter your initials: ";
 
 questionsSection.appendChild(enterInitials);
 
-// Enter initials
 
 var userInput = document.createElement("input");
 userInput.setAttribute("type", "text");
@@ -180,7 +172,6 @@ userInput.textContent = "";
 
 questionsSection.appendChild(userInput);
 
-// Submit user information
 
 var initialsSubmit = document.createElement("button");
 initialsSubmit.setAttribute("class", "btn btn-light");
@@ -190,7 +181,6 @@ initialsSubmit.textContent = "Submit";
 
 questionsSection.appendChild(initialsSubmit);
 
-// Event listener to capture initials and score in local storage 
 
 initialsSubmit.addEventListener("click", function (event) {
     event.preventDefault();
@@ -206,17 +196,14 @@ initialsSubmit.addEventListener("click", function (event) {
             score: timeRemaining
         }
 
-        // Clearing HTML at #questionSection 
 
         document.querySelector("#questionsSection").innerHTML = "";
 
-        // Create High Scores page heading
 
         var h2El = document.createElement("h2");
         h2El.setAttribute("id", "h2El");
         h2El.textContent = "High Scores!"
 
-        // Append element to page
 
         questionsSection.appendChild(h2El);
 
@@ -224,7 +211,6 @@ initialsSubmit.addEventListener("click", function (event) {
         var newScore = JSON.stringify(allScores);
         localStorage.setItem("allScores", newScore);
 
-        // Adds score to final page
 
         for (let i = 0; i < allScores.length; i++) {
             const el = allScores[i].initials + " " + allScores[i].score;
